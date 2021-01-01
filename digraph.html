@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Hill Digraph Decryption</title>
+    </head>
+    <body>
+        <style>
+            body {
+                font-family:helvetica;
+                font-size:25px;
+            }
+            td {
+                border:1px solid black;
+                text-align:center;
+            }
+        </style>
+        <table>
+            <tr>
+                <td>A</td><td>B</td><td>C</td><td>D</td><td>E</td><td>F</td><td>G</td><td>H</td><td>I</td><td>J</td><td>K</td><td>L</td>
+                <td>M</td><td>N</td><td>O</td><td>P</td><td>Q</td><td>R</td><td>S</td><td>T</td><td>U</td><td>V</td><td>W</td><td>X</td>
+                <td>Y</td><td>Z</td>
+            </tr>
+            <tr>
+                <td>0</td><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td><td>9</td><td>10</td><td>11</td>
+                <td>12</td><td>13</td><td>14</td><td>15</td><td>16</td><td>17</td><td>18</td><td>19</td><td>20</td><td>21</td><td>22</td><td>23</td>
+                <td>24</td><td>25</td>
+            </tr>
+        </table><br>
+        <table>
+            <tr>
+
+            </tr>
+        </table>
+        <script>
+            let key = [],
+                letters = [];
+            for(let i = 0; i < 4; i++) {
+                key[i] = parseInt(prompt(`Enter number ${i+1} of the key`));
+            }
+            let string = prompt("Enter encrypted string");
+            letters = string.split("");
+            if(letters.length%2 !== 0) {
+                letters.push("x");
+            }
+
+            document.body.innerHTML+= "A =「a b |<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| c d」<br><br>";
+            document.body.innerHTML+= `A =「${key[0]} ${key[1]} |<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| ${key[2]} ${key[3]}」`;
+
+            let det = (key[0]*key[3])-(key[1]*key[2]);
+            document.body.innerHTML+= `<br><br>Determinant = ad-bc = ${key[0]}(${key[3]}) - ${key[1]}(${key[2]}) = ${det}`;
+            document.body.innerHTML+= ` ≡ ${det%=26}mod26<br><br>`;
+            document.body.innerHTML+= `${det%=26}x ≡ 1mod26<br>`;
+            if(det < 0) {
+                document.body.innerHTML+= `${det+=26}x ≡ 1mod26<br>`;
+            }
+            let adj = 0;
+            console.log(det*adj);
+            while((det*adj)%26 != 1) {
+                if(adj != 0) {
+                    document.body.innerHTML+= `${det%26}(${adj}) ≡ 1mod26 : incorrect<br>`;
+                }
+                adj++;
+            }
+            document.body.innerHTML+= `<b>${det%26}(${adj}) ≡ 1mod26 : correct</b><br><br>`;
+            let temp = key[0];
+            document.body.innerHTML+= `A =「${key[0] = key[3]} ${key[1] = -key[1]}
+            |<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| ${key[2] = -key[2]} ${key[3] = temp}」<br><br>`;
+            document.body.innerHTML+= `adg「${key[0]} ${key[1]}
+            |<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| ${key[2]} ${key[3]}」<br><br>`;
+            document.body.innerHTML+= ` =${adj} x「${key[0]} ${key[1]} |<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| ${key[2]} ${key[3]}」<br><br>`;
+            document.body.innerHTML+= ` =「${key[0]*=adj} ${key[1]*=adj} |<br>&nbsp;&nbsp;&nbsp;&nbsp;| ${key[2]*=adj} ${key[3]*=adj}」mod26<br><br>`;
+            document.body.innerHTML+= ` =「${key[0]%=26} ${key[1]%=26} |<br>&nbsp;&nbsp;&nbsp;&nbsp;| ${key[2]%=26} ${key[3]%=26}」mod26<br><br>`;
+
+            for(let i = 0; i < 4; i++) {
+                do {
+                    key[i]+=26;
+                }while(key[i]+26 < 0);
+            }
+            document.body.innerHTML+= ` =「${key[0]%=26} ${key[1]%=26} |<br>&nbsp;&nbsp;&nbsp;&nbsp;| ${key[2]%=26} ${key[3]%=26}」mod26<br><br>`;
+
+            let table = document.createElement("table"),
+                tr1 = document.createElement("tr");
+                tr2 = document.createElement("tr");
+
+            table.append(tr1);
+            table.append(tr2);
+
+            for(let i = 0; i < letters.length; i++) {
+                if(i%2 === 0) {
+                    tr1.innerHTML+= `<td>${letters[i]}</td>`;
+                }
+            }
+            document.body.append(table);
+            for(let i = 0; i < letters.length; i++) {
+                if(i%2 !== 0) {
+                    tr2.innerHTML+= `<td>${letters[i]}</td>`;
+                }
+            }
+            if(letters.length%2 !== 0) {
+                tr2.innerHTML+= "<td>x</td>";
+            }
+
+            let answer = []
+
+            for(let i  = 0; i < letters.length; i++) {
+                if(i%2 === 1) {
+                    answer[i-1] = (key[0]*(letters[i-1].charCodeAt(0) - 97))+(key[1]*(letters[i].charCodeAt(0) - 97));
+                    answer[i] = (key[2]*(letters[i-1].charCodeAt(0) - 97))+(key[3]*(letters[i].charCodeAt(0) - 97))
+                    document.body.innerHTML+= ` =「${key[0]} ${key[1]} |(${letters[i-1]}) `;
+                    document.body.innerHTML+= ` = 「${key[0]} ${key[1]} |(${letters[i-1].charCodeAt(0) - 97})`;
+                    document.body.innerHTML+= ` =「${key[0]}(${letters[i-1].charCodeAt(0) - 97}) + ${key[1]}(${letters[i].charCodeAt(0) - 97})|`;
+                    document.body.innerHTML+= ` =「${answer[i-1]}|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`;
+                    document.body.innerHTML+= ` =「${answer[i-1]%26}|<br>`;
+
+                    document.body.innerHTML+= `&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|${key[2]} ${key[3]}」(${letters[i]})`;
+                    document.body.innerHTML+= `&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|${key[2]} ${key[3]}」(${letters[i].charCodeAt(0) - 97})`;
+                    document.body.innerHTML+= `&nbsp;&nbsp;&nbsp;&nbsp;|${key[2]}(${letters[i-1].charCodeAt(0) - 97}) + ${key[3]}(${letters[i].charCodeAt(0) - 97}))」`;
+                    document.body.innerHTML+= ` = |${answer[i]}」mod26`;
+                    document.body.innerHTML+= ` = |${answer[i]%26}」<br><br>`;
+                }
+            }
+            document.body.innerHTML+= "Plaintext = ";
+            for(let i = 0; i < answer.length; i++) {
+                console.log();
+                document.body.innerHTML+= `${String.fromCharCode((answer[i]%26)+97)}`;
+            }
+        </script>
+        <script src = "http://localhost:35729/livereload.js"></script>
+    </body>
+</html>
