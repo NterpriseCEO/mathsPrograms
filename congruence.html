@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Linear Congruence Calulator</title>
+    </head>
+    <body>
+        <style>
+            body {
+                font-family:helvetica;
+                font-size:25px;
+            }
+        </style>
+
+        <script src = "gcd.js"></script>
+        <script>
+            //6789783 28927591
+
+            let num1 = parseInt(prompt(`Enter number a: ax ≡ bmodm`)),
+                num2 = parseInt(prompt(`Enter number b: ${num1}x ≡ bmodm`)),
+                num3 = parseInt(prompt(`Enter number m: ${num1}x ≡ ${num2}modm`));
+
+            document.body.innerHTML+= "ax≡b(mod<i>m</i>)<br>";3030
+            document.body.innerHTML+= `${num1}x≡${num2}(mod<i>${num3}</i>)<br><br>`;
+
+            document.body.innerHTML+= `The <b>gcd</b> of numbers <b>A</b> and <b>B</b> reduced (a%m and b%m):<br>`;
+            document.body.innerHTML+= `<b><i>${num1}</i>mod${num3}</b> = ${num1%num3}<br>`;
+            document.body.innerHTML+= `<b><i>${num2}</i>mod${num3}</b> = ${num2%num3}<br>`;
+            document.body.innerHTML+= `<b>New equation: ${num1%num3}x ≡ ${num2%num3}mod${num3}</b><br><br>`;
+
+            let divisor = gcd(num1%num3, num3),
+                j = divisor[1],
+                GCD = divisor[0],
+                values = [];
+
+            num1%=num3
+            num2%=num3;
+
+
+            document.body.innerHTML+= `<br>`;
+            document.body.innerHTML+= "<b>ap + mq = gcd(a, m)</b> is equivalent to <b>ax + my = gcd(a, m)</b><br><br><br>";
+            let EEA = eea(divisor[2], j, GCD);
+
+            let value = (num2*EEA[0])/GCD;
+            document.body.innerHTML+= `<br><br>Linear congruence (getting the values for <b>x less than ${num3}</b>)<br><br>`;
+            document.body.innerHTML+= "x<sub>0</sub> ≡ (bp/gcd(a, m))mod<i>m</i><br><br>";
+            document.body.innerHTML+= `x<sub>0</sub> ≡ (${num2}(${EEA[0]})/${GCD})mod<i>${num3}</i><br>`;
+            document.body.innerHTML+= `x<sub>0</sub> ≡ (${num2*EEA[0]}/${GCD})mod<i>${num3}</i><br><br>`;
+
+            value = positiveMod(value, num3);
+            document.body.innerHTML+= `x<sub>0</sub> ≡ ${value}mod<i>${num3}</i><br><br>`;
+            values[0] = value;
+
+            document.body.innerHTML+= `<b>x<sub>n</sub> = x<sub>0</sub> + (nm/gcd(a, m))mod<i>m</i><br>Where n is 1,2,3 ...,gcd(a,m)-1</b><br><br>`;
+            for(let i = 1; i < GCD; i++) {
+                let iValue = value+((num3*i)/GCD);
+                document.body.innerHTML+= `x<sub>${i}</sub> ≡ ${value} + (${i}(${num3})/${GCD})mod<i>${num3}</i><br>`;
+                document.body.innerHTML+= `x<sub>${i}</sub> ≡ ${value} + (${num3*i}/${GCD})mod<i>${num3}</i><br>`;
+                document.body.innerHTML+= `x<sub>${i}</sub> ≡ ${iValue}mod<i>${num3}</i><br><br>`;
+                let mod = positiveMod(iValue, num3);
+                if(iValue != mod) {
+                    document.body.innerHTML+= `x<sub>${i}</sub> ≡ ${mod}mod<i>${num3}</i><br><br>`;
+                }
+                values.push(mod);
+            }
+
+            values.sort(function(a, b) {
+                return a - b;
+            });
+
+            document.body.innerHTML+= `Values for x less than ${num3} = ${values}<br>`;
+
+            document.body.innerHTML+= "<br><br>Diophantine equation:<br>";
+            document.body.innerHTML+= "x = x<sub>0</sub> + (b/d)k<br><br>";
+
+            document.body.innerHTML+= `x = ${values[0]}+(${num3}/${GCD})k<br>`;
+            document.body.innerHTML+= `x = ${values[0]}+${num3/GCD}k<br><br>---------------<br><br>`;
+
+            //document.body.innerHTML+= "y = y<sub>0</sub> - (a/d)k<br><br>";
+            //document.body.innerHTML+= `y = ${EEA[1]}-(${num1}/${GCD})k<br>`;
+            //document.body.innerHTML+= `y = ${EEA[1]}-${num1/GCD}k`;
+        </script>
+        <script src = "http://localhost:35729/livereload.js"></script>
+    </body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Fermat's little theorem</title>
+    </head>
+    <body>
+        <style>
+            body {
+                font-family:helvetica;
+                font-size:25px;
+            }
+        </style>
+        <script>
+            let a = parseInt(prompt("Enter 'a' (base) number")),
+                exp = parseInt(prompt("Enter exponent number")),
+                p = parseInt(prompt("Enter 'p' number"));
+
+            document.body.innerHTML+= `${a}<sup>${exp}</sup>mod${p}<br>`;
+            document.body.innerHTML+= "Using the remainder theorem<br>";
+            let p1 = p-1,
+                exp2 = Math.floor(exp/(p1)),
+                exp3 = exp%(p1);
+            document.body.innerHTML+= `${exp} = ${p1}(${exp2}) + ${exp3}<br><br>`;
+            document.body.innerHTML+= `${a}<sup>${exp}</sup> = (${a}<sup>${p1}</sup>)<sup>${exp2}</sup>${a}<sup>${exp3}</sup><br><br>`;
+            document.body.innerHTML+= `FLT => ${a}<sup>${p1}</sup> ≡ 1mod${p}<br>`;
+            document.body.innerHTML+= `${a}<sup>${exp}</sup> ≡ 1<sup>${exp2}</sup>${a}<sup>${exp3}</sup>(mod${p})<br><br>`;
+            document.body.innerHTML+= `&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ≡ ${Math.pow(a,exp3)}mod${p}<br>`;
+            document.body.innerHTML+= `&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ≡ ${(Math.pow(a,exp3))%p}<br>`;
+            //31
+            //5323905
+            //1039
+        </script>
+        <script src = "http://localhost:35729/livereload.js"></script>
+    </body>
+</html>

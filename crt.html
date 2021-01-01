@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Chinese remainder theorem</title>
+    </head>
+    <body>
+        <style>
+            body {
+                font-family:helvetica;
+                font-size:25px;
+            }
+        </style>
+
+        <script src = "gcd.js"></script>
+        <script>
+            let moreNumbers = true
+                numbers = [],
+                j = 0,
+                mString = mValues = mX = endEQ = endEQS = "",
+                m = 1,
+                subM = [],
+                answer = 0;
+            while(moreNumbers) {
+                if(j > 1) {
+                    moreNumbers = confirm("Do you wish to enter more numbers?");
+                }
+                if(moreNumbers) {
+                    numbers[j] = [
+                        parseInt(prompt("Enter r number")),
+                        parseInt(prompt("Enter mod n"))
+                    ];
+                    mValues+= `(${numbers[j][1]})`;
+                    m*=numbers[j][1];
+                    j++;
+                    mString+= `n<sub>${j}</sub>`;
+                }
+            }
+            for(let i = 0; i < numbers.length; i++) {
+                document.body.innerHTML+= `x ≡ ${numbers[i][0]}mod${numbers[i][1]}<br>`;
+            }
+            document.body.innerHTML+= `<br>M = ${mString} = ${mValues} = ${m}`;
+            for(let i = 0; i < numbers.length; i++) {
+                let part = 0;
+                subM[i] = m/numbers[i][1];
+                document.body.innerHTML+= `<br>M<sub>${i+1}</sub> = M/n<sub>${i+1}</sub> = `;
+                document.body.innerHTML+= `${m}/${numbers[i][1]} = ${subM[i]}<br>`;
+            }
+            document.body.innerHTML+= `<br><br>`;
+            for(let i = 0; i < numbers.length; i++) {
+                mX+=`M<sub>${i+1}</sub>x ≡ 1mod${numbers[i][1]}<br>`;
+                mX+=`${subM[i]}x ≡ 1mod${numbers[i][1]} = ${positiveMod(subM[i], numbers[i][1])}x ≡ 1mod${numbers[i][1]}<br><br>`;
+                endEQS += `+M<sub>${i+1}</sub>r<sub>${i+1}</sub>s<sub>${i+1}</sub>`;
+                endEQ+=`+${subM[i]}`;
+                part = subM[i];
+                subM[i] = positiveMod(subM[i], numbers[i][1]);
+
+                document.body.innerHTML+= `<br>${mX}`;
+
+                mX = "";
+
+                let divisor = gcd(subM[i], numbers[i][1]),
+                    GCD = divisor[0];
+                let EEA = eea(divisor[2],divisor[1], GCD);
+
+                document.body.innerHTML+= `<br><br>Linear congruence (getting the value for <b>x less than ${numbers[i][1]}</b>)<br>`;
+                document.body.innerHTML+= `s<sub>${i+1}</sub> ≡ (bp/gcd(a, m))mod<i>m</i><br><br>`;
+                document.body.innerHTML+= `s<sub>${i+1}</sub> ≡ (1(${EEA[0]})/${GCD})mod<i>${numbers[i][1]}</i><br>`;
+                document.body.innerHTML+= `s<sub>${i+1}</sub> ≡ (${1*EEA[0]}/${GCD})mod<i>${numbers[i][1]}</i><br>`;
+                let pos = positiveMod(EEA[0], numbers[i][1]),
+                    posGCD = pos/GCD;
+                if(EEA[0] < 0) {
+                    document.body.innerHTML+= `s<sub>${i+1}</sub> ≡ (${pos}/${GCD})mod<i>${numbers[i][1]}</i><br>`;
+                }
+                document.body.innerHTML+= `s<sub>${i+1}</sub> ≡ (${posGCD})mod<i>${numbers[i][1]}</i><br><br>`;
+                console.log(subM[i]);
+                endEQ+=`(${numbers[i][0]})(${posGCD})`;
+                part*=posGCD*numbers[i][0];
+                answer+=part;
+            }
+            document.body.innerHTML+= `<br>x = ${endEQS}<br>&nbsp;&nbsp; = ${endEQ} = ${answer}<br>`;
+            document.body.innerHTML+= ` &nbsp;&nbsp; ≡ ${answer}mod${m}<br>`;
+            if(answer > m) {
+                document.body.innerHTML+= ` &nbsp;&nbsp; ≡ ${positiveMod(answer, m)}mod${m}`;
+            }
+        </script>
+        <script src = "http://localhost:35729/livereload.js"></script>
+    </body>
+</html>
