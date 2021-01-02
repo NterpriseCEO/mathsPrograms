@@ -38,7 +38,7 @@
                 key[i] = parseInt(prompt(`Enter number ${i+1} of the key`));
             }
             let string = prompt("Enter encrypted string");
-            letters = string.split("");
+            letters = string.toLowerCase().split("");
             if(letters.length%2 !== 0) {
                 letters.push("x");
             }

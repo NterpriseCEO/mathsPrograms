@@ -14,8 +14,8 @@
         <script src = "gcd.js"></script>
         <script>
             //6789783 28927591
-            let num1 = parseInt(prompt("Enter number A")),
-                num2 = parseInt(prompt("Enter number B"))
+            let num1 = NUM1 = parseInt(prompt("Enter number A")),
+                num2 = NUM2 = parseInt(prompt("Enter number B"))
 
             let divisor = gcd(num1, num2),
                 j = divisor[1],
@@ -24,7 +24,7 @@
 
             document.body.innerHTML+= `<br>`;
 
-            let EEA = eea(divisor[2], j, GCD);
+            let EEA = eea(divisor[2], j, GCD, NUM1);
 
             let temp;
             if(num2 > num1) {
@@ -34,14 +34,23 @@
             }
 
             document.body.innerHTML+= "<br><br>Diophantine equation:<br>";
-            document.body.innerHTML+= "x = x<sub>0</sub> + (b/d)k<br><br>";
-
-            document.body.innerHTML+= `x = ${EEA[0]}+(${num2}/${EEA[2]})k<br>`;
-            document.body.innerHTML+= `x = ${EEA[0]}+${num2/EEA[2]}k<br><br>---------------<br><br>`;
-
-            document.body.innerHTML+= "y = y<sub>0</sub> - (a/d)k<br><br>";
-            document.body.innerHTML+= `y = ${EEA[1]}-(${num1}/${EEA[2]})k<br>`;
-            document.body.innerHTML+= `y = ${EEA[1]}-${num1/EEA[2]}k`;
+            //if(num2 == NUM1) {
+                //document.body.innerHTML+= "x = x<sub>0</sub> + (b/d)k<br><br>";
+                //document.body.innerHTML+= `x = ${EEA[1]}+(${NUM2}/${EEA[2]})k<br>`;
+                //document.body.innerHTML+= `x = ${EEA[1]}+${NUM2/EEA[2]}k<br><br>---------------<br><br>`;
+                //console.log("test 1");
+                //document.body.innerHTML+= "y = y<sub>0</sub> - (a/d)k<br><br>";
+                //document.body.innerHTML+= `y = ${EEA[0]}-(${NUM1}/${EEA[2]})k<br>`;
+                //document.body.innerHTML+= `y = ${EEA[0]}-${NUM1/EEA[2]}k`;
+            //}else {
+                document.body.innerHTML+= "x = x<sub>0</sub> + (b/d)k<br><br>";
+                document.body.innerHTML+= `x = ${EEA[0]}+(${NUM2}/${EEA[2]})k<br>`;
+                document.body.innerHTML+= `x = ${EEA[0]}+${NUM2/EEA[2]}k<br><br>---------------<br><br>`;
+                console.log("test 2");
+                document.body.innerHTML+= "y = y<sub>0</sub> - (a/d)k<br><br>";
+                document.body.innerHTML+= `y = ${EEA[1]}-(${NUM1}/${EEA[2]})k<br>`;
+                document.body.innerHTML+= `y = ${EEA[1]}-${NUM1/EEA[2]}k`;
+            //}
         </script>
         <script src = "http://localhost:35729/livereload.js"></script>
     </body>

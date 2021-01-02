@@ -30,7 +30,7 @@ function gcd(num1, num2) {
     return [GCD, j, array];
 }
 
-function eea(array, j, GCD) {
+function eea(array, j, GCD, NUM1) {
     console.log(array);
     console.log(j);
     let J = j;
@@ -41,7 +41,6 @@ function eea(array, j, GCD) {
     let X = array[j][0],
         Y = array[j][2],
         w = 0,
-        arrmEnding,
         output,
         x = 0, y = -1;
     for(let i = j; i > 0; i--) {
@@ -55,7 +54,6 @@ function eea(array, j, GCD) {
             document.body.innerHTML+= `${X}(${arr[1]})${Y}(${arrm[0]}(${arrm[1]})${arrm[2]}(${arrm[3]})) = ${GCD}<br>`;
             document.body.innerHTML+= `${X}(${arr[1]})${Y}(${arrm[1]})+${Y*arrm[2]}(${arr[1]}) = ${GCD}<br>`;
             document.body.innerHTML+= `${x}(${arr[1]})${Y}(${arrm[1]}) = ${GCD}<br>`;
-            arrmEnding = arr[1];
             output = [Y, x];
             console.log(output);
         }else {
@@ -68,24 +66,30 @@ function eea(array, j, GCD) {
             document.body.innerHTML+= `${x}(${arrm[1]})${arrm[2]*x}(${arr[1]})${Y}(${arr[1]}) = ${GCD}<br>`;
             document.body.innerHTML+= `${x}(${arrm[1]})${y}(${arr[1]}) = ${GCD}<br>`;
             Y = y;
-            arrmEnding = arrm[1];
             output = [x, Y];
         }
     }
     console.log(output);
     if(J === 1) {
         console.log("test", array);
-        output = [array[0][2], array[0][1]];
+        output = [array[0][0], array[0][2]];
+        console.log(NUM1);
+        if(array[0][3] == NUM1) {
+            console.log("testing");
+            output = [output[1],output[0]];
+        }
+        document.body.innerHTML+= `<br><br><b>x = ${output[0]}</b><br><b>y = ${output[1]}</b>`;
     }else if(J === 0) {
         document.body.innerHTML+= `0(${array[j][1]})+1(${array[j][3]}) = ${GCD}<br>`;
         output = [1, 0];
     }else {
-        console.log(arrmEnding, array[0][1]);
-        if(arrmEnding == array[0][3]) {
+        console.log( array[0][3],NUM1);
+        if(array[0][3] == NUM1) {
+            console.log("testing");
             output = [output[1],output[0]];
         }
+        document.body.innerHTML+= `<br><br><b>x = ${output[0]}</b><br><b>y = ${output[1]}</b>`;
     }
-    document.body.innerHTML+= `<br><br><b>x = ${output[0]}</b><br><b>y = ${output[1]}</b>`;
     return [...output, GCD];
 }
 

@@ -38,7 +38,8 @@
 
             document.body.innerHTML+= `<br>`;
             document.body.innerHTML+= "<b>ap + mq = gcd(a, m)</b> is equivalent to <b>ax + my = gcd(a, m)</b><br><br><br>";
-            let EEA = eea(divisor[2], j, GCD);
+            console.log(divisor[2]);
+            let EEA = eea(divisor[2], j, GCD, num1%num3);
 
             let value = (num2*EEA[0])/GCD;
             document.body.innerHTML+= `<br><br>Linear congruence (getting the values for <b>x less than ${num3}</b>)<br><br>`;

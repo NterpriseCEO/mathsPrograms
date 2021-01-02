@@ -60,7 +60,7 @@
 
                 let divisor = gcd(subM[i], numbers[i][1]),
                     GCD = divisor[0];
-                let EEA = eea(divisor[2],divisor[1], GCD);
+                let EEA = eea(divisor[2],divisor[1], GCD, subM[i]);
 
                 document.body.innerHTML+= `<br><br>Linear congruence (getting the value for <b>x less than ${numbers[i][1]}</b>)<br>`;
                 document.body.innerHTML+= `s<sub>${i+1}</sub> ≡ (bp/gcd(a, m))mod<i>m</i><br><br>`;
