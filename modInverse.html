@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Calculators for maths!</title>
+    </head>
+    <body>
+        <style>
+            body {
+                font-family:helvetica;
+                font-size:25px;
+            }
+        </style>
+        <b>WARNING!!!!! This might not work for certain questions</b><br><br>
+        <script>
+            let numbers = [],
+                mod;
+            for (var i = 0; i < 4; i++) {
+                numbers[i] = parseInt(prompt(`Enter number ${String.fromCharCode(i+97)}`));
+            }
+            mod = parseInt(prompt("Enter number mod number"));
+            document.body.innerHTML+= "A = 「a b|<br>";
+            document.body.innerHTML+= "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|c d」<br><br><br>";
+
+            document.body.innerHTML+= `A = 「${numbers[0]} ${numbers[1]}|<br>`;
+            document.body.innerHTML+= `&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|${numbers[2]} ${numbers[3]}」<br><br><br>`;
+
+            document.body.innerHTML+= "A<sup>-1</sup> =&nbsp;&nbsp;&nbsp;1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;「d -b|<br>";
+            document.body.innerHTML+= "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_____<br>";
+            document.body.innerHTML+= "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(ad-bc&nbsp;)&nbsp;|-c a」<br><br><br>";
+
+            document.body.innerHTML+= `A<sup>-1</sup> =&nbsp;&nbsp;&nbsp;1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;「${numbers[3]} ${-numbers[1]}|<br>`;
+            document.body.innerHTML+= "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_____<br>";
+            document.body.innerHTML+= `&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(${numbers[0]}(${numbers[3]})-${numbers[1]}(${numbers[2]}))&nbsp;&nbsp;|${-numbers[2]} ${numbers[0]}」<br><br><br>`;
+
+            let detB = (numbers[0]*numbers[3])-(numbers[1]*numbers[2]);
+            document.body.innerHTML+= `A<sup>-1</sup> =&nbsp;&nbsp;&nbsp;1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;「${numbers[3]} ${-numbers[1]}|<br>`;
+            document.body.innerHTML+= "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_____<br>";
+            document.body.innerHTML+= `&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${detB}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|${-numbers[2]} ${numbers[0]}」<br><br>`;
+
+            numbers = [numbers[3],-numbers[1],-numbers[2],numbers[0]];
+
+            let det = 1/detB;
+            document.body.innerHTML+= `A<sup>-1</sup> =&nbsp;${det}「${numbers[0]} ${numbers[1]}|<br>`;
+            document.body.innerHTML+= `&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|${numbers[2]} ${numbers[3]}」<br><br>`;
+
+            document.body.innerHTML+= `A<sup>-1</sup> =&nbsp;${det}「${numbers[0]}(${det}) ${numbers[1]}(${det})|<br>`;
+            document.body.innerHTML+= `&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|${numbers[2]}(${det}) ${numbers[3]}(${det})」mod${mod}<br><br>`;
+
+            document.body.innerHTML+= `A<sup>-1</sup> =&nbsp;「${numbers[0]*det} ${numbers[1]*det}|<br>`;
+            document.body.innerHTML+= `&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|${numbers[2]*det} ${numbers[3]*det}」mod${mod}<br><br>`;
+
+            let change = false;
+            for(let i = 0; i < 4; i++) {
+                if(numbers[i]*det < 0) {
+                    change = true;
+                    console.log(numbers[i]);
+                    numbers[i] = (numbers[i]*det)+mod;
+                }else {
+                    numbers[i]*=det;
+                }
+            }
+            if(change) {
+                document.body.innerHTML+= `A<sup>-1</sup> =&nbsp;「${numbers[0]} ${numbers[1]}|<br>`;
+                document.body.innerHTML+= `&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|${numbers[2]} ${numbers[3]}」mod${mod}`;
+            }
+        </script>
+        <script src = "http://localhost:35729/livereload.js"></script>
+    </body>
+</html>
