@@ -11,6 +11,18 @@
             }
         </style>
         <script>
+            document.title = makeID(10);
+            function makeID(length) {
+                let result           = '',
+                    characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789',
+                    charactersLength = characters.length;
+                for (let i = 0; i < length; i++ ) {
+                    result += characters.charAt(Math.floor(Math.random() * charactersLength));
+                }
+                return result;
+            }
+        </script>
+        <script>
             let a = parseInt(prompt("Enter 'a' (base) number")),
                 exp = parseInt(prompt("Enter exponent number")),
                 p = parseInt(prompt("Enter 'p' number"));

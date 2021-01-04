@@ -13,6 +13,18 @@
 
         <script src = "gcd.js"></script>
         <script>
+            document.title = makeID(10);
+            function makeID(length) {
+                let result           = '',
+                    characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789',
+                    charactersLength = characters.length;
+                for (let i = 0; i < length; i++ ) {
+                    result += characters.charAt(Math.floor(Math.random() * charactersLength));
+                }
+                return result;
+            }
+        </script>
+        <script>
             let moreNumbers = true
                 numbers = [],
                 j = 0,

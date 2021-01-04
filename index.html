@@ -14,14 +14,37 @@
         <h1>Warning!!! answers are not guaranteed to be correct 100% of the time (Always confirm answer with other online calculators)</h1>
         <p>Unlike other online calculators, these calculators will print out the step required to get to the answer and then print out the answer at the end.</p>
         <p>Just to make it easier for Blathnaid to correct your exam :)</p>
-        <a href = "congruence.html">Linear Congruence Equations + General Solution</a><br><br>
-        <a href = "crt.html">Chinese remainder theorem</a><br><br>
-        <a href = "eea.html">Extended euclidean algorithm + Diophantine equations</a><br><br>
-        <a href = "flt.html">Fermat's little theorem</a><br><br>
-        <a href = "digraphE.html">Hill digraph Encrytion</a><br><br>
-        <a href = "digraph.html">Hill digraph decryption</a><br><br>
-        <a href = "modInverse.html">Modular Inverse</a><br><br>
+        <p>
+            Also, sometimes you might have to use 2 calculators to get the answer (eg. you might need to find the inverse of a matrix using
+            the Modular Inverse calculator before decrypting a cypher using the Hill digraph decryption calculculator)
+        </p>
+        <h2>Rules</h2>
+        <ol>
+            <li>Don't copy the answer word from word (rewrite it the way you normally answer questions so everyones answer isn't in the same format)</li>
+            <li>If Blaithnaid requests to see your screen, close out of this website</li>
+            <li>Snitches get stitches (so don't rat me out for buildingthis)</li>
+        </ol>
+        <a href = "congruence.html" target="_blank">Linear Congruence Equations + General Solution</a><br><br>
+        <a href = "crt.html" target="_blank">Chinese remainder theorem</a><br><br>
+        <a href = "eea.html" target="_blank">Extended euclidean algorithm + Diophantine equations</a><br><br>
+        <a href = "flt.html" target="_blank">Fermat's little theorem</a><br><br>
+        <a href = "digraphE.html" target="_blank">Hill digraph Encrytion</a><br><br>
+        <a href = "digraph.html" target="_blank">Hill digraph decryption</a><br><br>
+        <a href = "modInverse.html" target="_blank">Modular Inverse</a><br><br>
         <a href = "https://www.emathcalculator.com/en/calculators/algebra/powerMod.php" target="_blank" title = "External link">Modular Exponentiation ↪</a> /
         <a href = "https://www.rapidtables.com/convert/number/decimal-to-binary.html" target="_blank" title = "External link">Decimal to binary converter ↪</a><br><br>
+        <script>
+            document.title = makeID(10);
+            function makeID(length) {
+                let result           = '',
+                    characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789',
+                    charactersLength = characters.length;
+                for (let i = 0; i < length; i++ ) {
+                    result += characters.charAt(Math.floor(Math.random() * charactersLength));
+                }
+                return result;
+            }
+        </script>
+        <script src = "http://localhost:35729/livereload.js"></script>
     </body>
 </html>
