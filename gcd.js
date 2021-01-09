@@ -100,7 +100,6 @@ function positiveMod(x, y) {
         }
     }else if(x < 0) {
         while(x < 0 || x+y < y) {
-            console.log(x);
             x+=y;
         }
     }
