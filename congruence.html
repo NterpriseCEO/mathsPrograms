@@ -79,7 +79,7 @@
                 return a - b;
             });
 
-            document.body.innerHTML+= `Values for x less than ${num3} = ${values}<br>`;
+            document.body.innerHTML+= `Values for x less than ${num3} = ${values.join(", ")}<br>`;
 
             document.body.innerHTML+= "<br><br>Diophantine equation:<br>";
             document.body.innerHTML+= "x = x<sub>0</sub> + (b/d)k<br><br>";
